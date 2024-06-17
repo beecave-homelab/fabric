@@ -4,7 +4,7 @@ FROM ubuntu:22.04
 RUN apt update -y \
     && apt install python3 -y \
     && apt install pipx -y \
-    && pipx ensurepath \
+    # && pipx ensurepath \
     # optional to allow pipx actions with --global argument
     && pipx ensurepath --global
 
