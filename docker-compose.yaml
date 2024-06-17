@@ -1,0 +1,9 @@
+services:
+  fabric:
+    build: .
+    image: beecave-homelab/fabric:main
+    container_name: fabric
+    restart: unless-stopped
+    ports:
+      - 13337:13337
+      - 13338:13338
