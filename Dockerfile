@@ -1,4 +1,4 @@
-FROM ubuntu:22.04-dev
+FROM ubuntu:22.04
 
 # Install requirements. Setup pipx
 RUN apt update -y \
