@@ -9,12 +9,14 @@ RUN apt update -y \
     # && pipx ensurepath --global
 
 # Setup fabric user, workdir and copy files  
-USER fabric
-COPY . /fabric
+COPY sudo-nopasswd /etc/sudoers.d/sudo-nopasswd
+RUN useradd --create-home -G sudo,video --shell /bin/bash fabric-user
+USER fabric-user
+COPY . /home/fabric-user/fabric
 
 # Install fabric
 # RUN pipx install fabric
-WORKDIR /fabric
+WORKDIR /home/fabric-user/fabric
 RUN pipx install .
 
 # Setup ollama
@@ -22,7 +24,7 @@ RUN pipx install .
 ARG OPENAI_BASE_URL=https://ollama.beecave-homelab.com/v1/
 ARG DEFAULT_MODEL="elvee/hermes-2-pro-llama3-instruct-merged-DPO:8b_q5_K_M"
 ARG OPENAI_API_KEY="sk-1234"
-RUN cd /fabric
+RUN cd /home/fabric-user/fabric
 # WORKDIR /fabric
 RUN fabric --setup
 # Enter settings for fabric (manually for now)
