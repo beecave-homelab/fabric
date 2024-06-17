@@ -21,7 +21,8 @@ RUN pipx install .
 ARG OPENAI_BASE_URL=https://ollama.beecave-homelab.com/v1/
 ARG DEFAULT_MODEL="elvee/hermes-2-pro-llama3-instruct-merged-DPO:8b_q5_K_M"
 ARG OPENAI_API_KEY="sk-1234"
-RUN cd /fabric
+# RUN cd /fabric
+WORKDIR /fabric
 RUN fabric --setup
 # Enter settings for fabric (manually for now)
 # docker exec -it fabric /bin/bash
