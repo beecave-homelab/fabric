@@ -25,8 +25,4 @@ ARG OPENAI_API_KEY="sk-1234"
 # Enter settings for fabric (manually for now)
 # docker exec -it fabric /bin/bash
 # fabric --setup
-RUN fabric --setup
-
-
-
-
+# RUN fabric --setup
