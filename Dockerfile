@@ -43,6 +43,9 @@ USER fabric-user
 RUN /home/fabric-user/fabric_setup.exp
 
 # Expose necessary ports and set command
+ENV OPENAI_BASE_URL=http://host.docker.network:11434
+ENV DEFAULT_MODEL="elvee/hermes-2-pro-llama3-instruct-merged-DPO:8b_q5_K_M"
+
 EXPOSE 13337
 EXPOSE 13338
 CMD ["fabric-webui"]
