@@ -42,10 +42,19 @@ USER fabric-user
 # Run the expect script to setup fabric
 RUN /home/fabric-user/fabric_setup.exp
 
-# Expose necessary ports and set command
-ENV OPENAI_BASE_URL=http://host.docker.network:11434
-ENV DEFAULT_MODEL="elvee/hermes-2-pro-llama3-instruct-merged-DPO:8b_q5_K_M"
+COPY .env /home/.config/fabric/.env
 
+# Setup envs to use in the .env file that pipx creates
+# ENV DEFAULT_MODEL=default_model
+# ENV FABRIC_FRONTMATTER=""
+# ENV FABRIC_OUTPUT_PATH=$(pwd)
+# ENV OPENAI_BASE_URL=https://YOUR-SERVER:8000/v1/
+# ENV OPENAI_API_KEY=api_key
+# ENV CLAUDE_API_KEY=api_key
+# ENV GOOGLE_API_KEY=api_key
+# ENV YOUTUBE_API_KEY=api_key
+
+# Expose necessary ports and set command
 EXPOSE 13337
 EXPOSE 13338
 CMD ["fabric-webui"]
