@@ -1,0 +1,22 @@
+services:
+  fabric-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    image: fabric-api
+    container_name: fabric-api
+    restart: unless-stopped
+    ports:
+      - 13337:13337
+
+  fabric-webui:
+    build:
+      context: .
+      dockerfile: Dockerfile.webui
+    image: fabric-webui
+    container_name: fabric-webui
+    restart: unless-stopped
+    depends_on: 
+      - fabric-api
+    ports:
+      - 13338:13338
