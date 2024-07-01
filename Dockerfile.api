@@ -1,7 +1,7 @@
 #####################
 ### Dockerfile webui ###
 #####################
-FROM python:3.12 AS fabric-base
+FROM python:3.10 AS fabric-base
 
 # Install sudo and expect
 RUN apt-get update -y \
