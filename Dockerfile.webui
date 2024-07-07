@@ -44,8 +44,6 @@ USER fabric-user
 
 COPY .env /home/.config/fabric/.env
 
-# COPY .env /home/.config/fabric/.env
-
 # Setup envs to use in the .env file that pipx creates
 # ENV DEFAULT_MODEL=default_model
 # ENV FABRIC_FRONTMATTER=""
@@ -57,7 +55,7 @@ COPY .env /home/.config/fabric/.env
 # ENV YOUTUBE_API_KEY=api_key
 
 # Expose necessary ports and set command
-EXPOSE 13337
-# EXPOSE 13338
+# EXPOSE 13337
+EXPOSE 13338
 CMD ["fabric-webui"]
 # CMD ["fabric-api"]
