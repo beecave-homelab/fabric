@@ -1,0 +1,26 @@
+services:
+  fabric-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api-v2
+    image: fabric-api-v3
+    container_name: fabric-api-v3
+    restart: unless-stopped
+    ports:
+      - 13337:13337
+    environment:
+      - FLASK_SECRET_KEY=$FLASK_SECRET_KEY
+      - JWT_SECRET=$JWT_SECRET
+      - OPENAI_API_KEY=$OPENAI_API_KEY
+      - DEFAULT_MODEL=$DEFAULT_MODEL
+      - FABRIC_OUTPUT_PATH=$FABRIC_OUTPUT_PATH
+      - OPENAI_BASE_URL=$OPENAI_BASE_URL
+      - CLAUDE_API_KEY=$CLAUDE_API_KEY
+      - GOOGLE_API_KEY=$GOOGLE_API_KEY
+      - YOUTUBE_API_KEY=$YOUTUBE_API_KEY
+      - REMOTE_OLLAMA_URL=$REMOTE_OLLAMA_URL
+    volumes:
+      - .save/:$FABRIC_OUTPUT_PATH/
+      # - .env:/home/fabric-user/.config/fabric/.env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

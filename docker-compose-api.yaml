@@ -1,0 +1,21 @@
+services:
+  fabric-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    image: fabric-api
+    container_name: fabric-api
+    restart: unless-stopped
+    ports:
+      - 13337:13337
+    environment:
+      # - FLASK_SECRET_KEY=$FLASK_SECRET_KEY
+      # - JWT_SECRET=$JWT_SECRET
+      # - OPENAI_API_KEY=$OPENAI_API_KEY
+      # - DEFAULT_MODEL=$DEFAULT_MODE
+      # - FABRIC_FRONTMATTER=$FABRIC_FRONTMATTER
+      # - FABRIC_OUTPUT_PATH=$FABRIC_OUTPUT_PATH
+      - # OPENAI_BASE_URL=$OPENAI_BASE_URL
+      - # CLAUDE_API_KEY=$CLAUDE_API_KEY
+      - # GOOGLE_API_KEY=$GOOGLE_API_KEY
+      # - YOUTUBE_API_KEY=$YOUTUBE_API_KEY

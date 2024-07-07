@@ -15,52 +15,38 @@ RUN useradd --create-home -G sudo --shell /bin/bash fabric-user
 WORKDIR /home/fabric-user/
 USER fabric-user
 
-
 # Copy project files and install dependencies
 COPY . /home/fabric-user/fabric
 RUN pipx install /home/fabric-user/fabric
 ENV PATH="${PATH}:/home/fabric-user/.local/bin"
 
-# Create an expect script to automate fabric --setup
-RUN echo '#!/usr/bin/expect\n\
-spawn fabric --setup\n\
-expect "Please enter your OpenAI API key. If you do not have one or if you have already entered it, press enter."\n\
-send "\r"\n\
-expect "Please enter your claude API key. If you do not have one, or if you have already entered it, press enter."\n\
-send "\r"\n\
-expect "Please enter your Google API key. If you do not have one, or if you have already entered it, press enter."\n\
-send "\r"\n\
-expect "Please enter your YouTube API key. If you do not have one, or if you have already entered it, press enter."\n\
-send "\r"\n\
-interact' > /home/fabric-user/fabric_setup.exp \
-    && chmod +x /home/fabric-user/fabric_setup.exp
+# Install script to automatically run `fabric --setup`
+RUN /home/fabric-user/fabric/setup.sh
 
-# Run the expect script to setup fabric
-RUN /home/fabric-user/fabric_setup.exp
 
 #############################
 ### Dockerfile fabric-api ###
 #############################
-FROM fabric-base AS fabric-setup
+FROM fabric-base AS fabric-api
 
 WORKDIR /home/fabric-user/fabric
 USER fabric-user
 
 # COPY .env /home/.config/fabric/.env
-# DEL /home/.config/fabric/.env
 RUN echo "" > /home/fabric-user/.config/fabric/.env
 
 # Setup envs to use in the .env file that pipx creates
 ENV DEFAULT_MODEL=gpt-4o
 ENV FABRIC_FRONTMATTER=""
 ENV FABRIC_OUTPUT_PATH=/home/fabric-user/fabric/save
-ENV OPENAI_BASE_URL=https://api.openai.com/v1/
+ENV OPENAI_BASE_URL=http://host.docker.internal:11434/v1
 ENV OPENAI_API_KEY=api_key
 ENV CLAUDE_API_KEY=api_key
 ENV GOOGLE_API_KEY=api_key
 ENV YOUTUBE_API_KEY=api_key
-# ENV REMOTE_OLLAMA_URL=http://192.168.1.1:11434/v1/
+ENV REMOTE_OLLAMA_URL=http://host.docker.internal:11434/v1
 
 # Expose necessary ports and set command
+RUN /home/fabric-user/fabric/installer/server/api/00-entrypoint-script.sh
 EXPOSE 13337
 CMD ["fabric-api"]

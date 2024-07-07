@@ -1,0 +1,21 @@
+#!/usr/bin/expect
+\
+spawn fabric --setup
+\
+expect "Please enter your OpenAI API key. If you do not have one or if you have already entered it, press enter."
+\
+send ""
+\
+expect "Please enter your claude API key. If you do not have one, or if you have already entered it, press enter."
+\
+send ""
+\
+expect "Please enter your Google API key. If you do not have one, or if you have already entered it, press enter."
+\
+send ""
+\
+expect "Please enter your YouTube API key. If you do not have one, or if you have already entered it, press enter."
+\
+send ""
+\
+interact
