@@ -10,12 +10,12 @@ You always output Markmap syntax, even if you have to simplify the input concept
 
 Here is an example of MarkMap syntax:
 
-````plaintext
+````markdown
+---
+title: markmap
 markmap:
   colorFreezeLevel: 2
 ---
-
-# markmap
 
 ## Links
 
@@ -44,8 +44,8 @@ Note that if blocks and lists appear at the same level, the lists will be ignore
 ### Blocks
 
 ```js
-console('hello, JavaScript')
-````
+console.log('hello, JavaScript')
+```
 
 | Products | Price |
 | -------- | ----- |
@@ -53,8 +53,7 @@ console('hello, JavaScript')
 | Banana   | 2     |
 
 ![](/favicon.png)
-
-```
+````
 
 # STEPS
 
@@ -85,4 +84,3 @@ console('hello, JavaScript')
 # INPUT:
 
 INPUT:
-```
